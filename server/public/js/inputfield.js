@@ -1,23 +1,9 @@
-// Get product json and push to data array---
-var localDeliverData;
-
-$.get('http://localhost:10010', function(res) {
-	localDeliverData = res
-})
-
-	.done(function() {
-	console.log(localDeliverData)
-})
-
-	.fail(function( jqxhr, textStatus, error ) {
-	var err = textStatus + ", " + error;
-	console.log( "Request Failed: " + err );
-});
-
 var latitude;
 var longitude;
+var localProducts;
 
 // location latitude & longitude
+
 function geoFindMe() {
 	var output = document.getElementById("out");
 
@@ -37,6 +23,13 @@ function geoFindMe() {
 
 		output.appendChild(img);
 		pushLongLat();
+		$.ajax({
+			type: 'GET', 
+			url: 'http://127.0.0.1:10010/products?keyword=ball&latlong=' + longAndLad,
+			success: function(res){
+				localProducts = res;
+			}
+		});
 	};
 
 	function error() {
@@ -49,14 +42,10 @@ function geoFindMe() {
 }
 
 
-//pushing long and lad to localDeliverData----
-var parsedDeliverData = JSON.parse(localDeliverData);
+//pushing long and lad to localDeliverData--
 
 var longAndLad;
-var newDeliverData
 
 function pushLongLat() {
-	longAndLad = longitude.valueOf().toString() + "," + latitude.valueOf().toString();
-
-	newDeliverData = localDeliverData.paths["/products"].get.parameters[1].description.replace('user latitude and longitude, seperated by a comma', longAndLad.valueOf());
-};
+	longAndLad = latitude.valueOf().toString() + "," + longitude.valueOf().toString();
+}

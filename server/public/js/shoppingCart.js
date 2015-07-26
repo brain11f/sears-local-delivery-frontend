@@ -49,7 +49,7 @@ shoppingCart.prototype.saveItems = function () {
 }
 
 // adds an item to the cart
-shoppingCart.prototype.addItem = function (sku, name, price, quantity) {
+shoppingCart.prototype.addItem = function (ImageURL, BrandName, DisplayPrice, quantity) {
     quantity = this.toNumber(quantity);
     if (quantity != 0) {
 
@@ -57,7 +57,7 @@ shoppingCart.prototype.addItem = function (sku, name, price, quantity) {
         var found = false;
         for (var i = 0; i < this.items.length && !found; i++) {
             var item = this.items[i];
-            if (item.sku == sku) {
+									if (item.ImageURL == ImageURL) {
                 found = true;
                 item.quantity = this.toNumber(item.quantity + quantity);
                 if (item.quantity <= 0) {
