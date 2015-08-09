@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 // the storeController contains two objects:
 // - store: contains the product list
@@ -6,6 +6,7 @@
 function storeController($scope, $routeParams, DataService) {
 
     // get store and cart from service
+	$scope.getData = DataService.getData;
     $scope.store = DataService.store;
     $scope.cart = DataService.cart;
 

@@ -15,19 +15,15 @@ function geoFindMe() {
 	function success(position) {
 		latitude  = position.coords.latitude;
 		longitude = position.coords.longitude;
-
-		output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-
-		var img = new Image();
-		img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-
-		output.appendChild(img);
 		pushLongLat();
+		
 		$.ajax({
 			type: 'GET', 
 			url: 'http://127.0.0.1:10010/products?keyword=ball&latlong=' + longAndLad,
 			success: function(res){
 				localProducts = res;
+
+				myStore = new store();
 			}
 		});
 	};
@@ -35,8 +31,6 @@ function geoFindMe() {
 	function error() {
 		output.innerHTML = "Unable to retrieve your location";
 	};
-
-	output.innerHTML = "<p>Locating…</p>";
 
 	navigator.geolocation.getCurrentPosition(success, error);
 }
@@ -48,4 +42,7 @@ var longAndLad;
 
 function pushLongLat() {
 	longAndLad = latitude.valueOf().toString() + "," + longitude.valueOf().toString();
-}
+};
+//----parse Data------
+
+//	new product(localProducts.data[1][1].Description.ImageURL, localProducts.data[1][1].Description.BrandName, localProducts.data[1][1].Description.Name, localProducts.data[1][1].Price.CutPrice)
