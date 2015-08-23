@@ -24,18 +24,30 @@ var storeApp = angular.module('AngularStore', []).
 
 // create a data service that provides a store and a shopping cart that
 // will be shared by all views (instead of creating fresh ones for each view).
+//storeApp.factory("HttpData", function($scope, $http) {
+//	var localData;
+//	function getData() {
+//		$http.get('http://127.0.0.1:10010/products?keyword=ball&latlong=47.6568777,-122.3159348')
+//			.success(function(res) {
+//			res.data = $scope.localData; 
+//			console.log(res.data);
+//		});
+//	}
+//});
+
 
 storeApp.factory("DataService", function() {
+
 	var myData = new geoFindMe();
 	
-	var myStore;
+//	var myStore = new store();
 	
     // create shopping cart
     var myCart = new shoppingCart("AngularStore");
 
     // return data object with store and cart
     return {
-		store: myStore,
+//		store: myStore,
         cart: myCart
     };
 });

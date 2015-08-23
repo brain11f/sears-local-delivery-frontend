@@ -22,8 +22,10 @@ function geoFindMe() {
 			url: 'http://127.0.0.1:10010/products?keyword=ball&latlong=' + longAndLad,
 			success: function(res){
 				localProducts = res;
-
+				console.log('get/data');
+				storeApp.factory(myCart = new shoppingCart("AngularStore"))
 				myStore = new store();
+				console.dir(myStore);
 			}
 		});
 	};
@@ -43,6 +45,3 @@ var longAndLad;
 function pushLongLat() {
 	longAndLad = latitude.valueOf().toString() + "," + longitude.valueOf().toString();
 };
-//----parse Data------
-
-//	new product(localProducts.data[1][1].Description.ImageURL, localProducts.data[1][1].Description.BrandName, localProducts.data[1][1].Description.Name, localProducts.data[1][1].Price.CutPrice)

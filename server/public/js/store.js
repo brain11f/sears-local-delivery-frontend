@@ -8,6 +8,7 @@ function store() {
 		new product(localProducts.data[3].Description.ImageURL, localProducts.data[3].Description.BrandName, localProducts.data[3].Description.Name, localProducts.data[3].Price.CutPrice),
 		new product(localProducts.data[4].Description.ImageURL, localProducts.data[4].Description.BrandName, localProducts.data[4].Description.Name, localProducts.data[4].Price.CutPrice)
 	];
+	console.log('products/list');
 }
 
 store.prototype.getProduct = function (sku) {
