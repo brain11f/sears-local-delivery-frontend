@@ -1,6 +1,7 @@
+storeApp.factory('getData', ['$http', function($http) {
+    
 var latitude;
 var longitude;
-var localProducts;
 
 // location latitude & longitude
 
@@ -17,26 +18,23 @@ function geoFindMe() {
 		longitude = position.coords.longitude;
 		pushLongLat();
 		
-		$.ajax({
-			type: 'GET', 
-			url: 'http://127.0.0.1:10010/products?keyword=ball&latlong=' + longAndLad,
-			success: function(res){
-				localProducts = res;
-				console.log('get/data');
-				storeApp.factory(myCart = new shoppingCart("AngularStore"))
-				myStore = new store();
-				console.dir(myStore);
+        return $http.get('http://127.0.0.1:10010/products?keyword=ball&latlong=' + longAndLad)
+			.success(function(res){
+            return res;
+        })
+            .error(function(err) {
+            return err;
+        })
 			}
-		});
-	};
+
 
 	function error() {
 		output.innerHTML = "Unable to retrieve your location";
 	};
 
 	navigator.geolocation.getCurrentPosition(success, error);
-}
 
+};
 
 //pushing long and lad to localDeliverData--
 
@@ -45,3 +43,5 @@ var longAndLad;
 function pushLongLat() {
 	longAndLad = latitude.valueOf().toString() + "," + longitude.valueOf().toString();
 };
+
+}]);
